@@ -1,11 +1,16 @@
 #!/bin/sh
+#how to execute this command run as below line no 3 - without the comment offcourse - da 
+#wget -O - https://raw.githubusercontent.com/ImmLearning/GCP/main/GKE.sh | bash
+
+
 echo "run gcloud config set project <projectname> beforehand"
+echo "set these variables beforehand the region and the cluster name REGION=us-central1;CLUSTER=gke-load-test"
 
 #setting up variables 
-REGION=us-central1
+#REGION=us-central1
 ZONE=${REGION}-b
 PROJECT=$(gcloud config get-value project)
-CLUSTER=gke-load-test
+#CLUSTER=gke-load-test
 TARGET=${PROJECT}.appspot.com
 SCOPE="https://www.googleapis.com/auth/cloud-platform"
 
