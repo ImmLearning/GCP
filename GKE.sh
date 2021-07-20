@@ -4,16 +4,16 @@
 
 
 echo "run gcloud config set project <projectname> beforehand"
-echo "set these variables beforehand the region and the cluster name REGION=us-central1;CLUSTER=gke-load-test"
+echo "set these variables beforehand the region and the cluster name REGION=us-central1;ZONE=${REGION}-b;CLUSTER=gke-load-testv8;TARGET=${PROJECT}.appspot.com and SCOPE"
 
 #setting up variables 
-REGION=us-central1
-ZONE=${REGION}-b
-ZONE=${REGION}-b
+#REGION=us-central1
+#ZONE=${REGION}-b
+#ZONE=${REGION}-b
 PROJECT=$(gcloud config get-value project)
-CLUSTER=gke-load-testv5
-TARGET=${PROJECT}.appspot.com
-SCOPE="https://www.googleapis.com/auth/cloud-platform"
+#CLUSTER=gke-load-testv5
+#TARGET=${PROJECT}.appspot.com
+#SCOPE="https://www.googleapis.com/auth/cloud-platform"
 
 #information for overwritting cluster nomenclature below 
 
