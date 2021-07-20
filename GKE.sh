@@ -7,10 +7,11 @@ echo "run gcloud config set project <projectname> beforehand"
 echo "set these variables beforehand the region and the cluster name REGION=us-central1;CLUSTER=gke-load-test"
 
 #setting up variables 
-#REGION=us-central1
+REGION=us-central1
+ZONE=${REGION}-b
 ZONE=${REGION}-b
 PROJECT=$(gcloud config get-value project)
-#CLUSTER=gke-load-test
+CLUSTER=gke-load-testv5
 TARGET=${PROJECT}.appspot.com
 SCOPE="https://www.googleapis.com/auth/cloud-platform"
 
@@ -42,7 +43,8 @@ gcloud builds submit \
 gcloud container images list | grep locust-tasks
 
 #deploying sample application on docker engine 
-gcloud app deploy sample-webapp/app.yaml \
+#if already deployed then no need to redeploy as its just a sample application
+gcloud --quiet app deploy sample-webapp/app.yaml \
   --project=$PROJECT
   
 #Replace the target host and project ID with the deployed endpoint and project ID in the locust-master-controller.yaml and locust-worker-controller.yaml files
@@ -67,6 +69,8 @@ timeout -k 120 60 kubectl get svc locust-master --watch
 #getting external Ip attached and echo it 
 EXTERNAL_IP=$(kubectl get svc locust-master -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 echo "locust external ip below"
-echo $EXTERNAL_IP
+#echo $EXTERNAL_IP
+echo "${EXTERNAL_IP}:8089"
+echo "open above IP in browser and start load test"
 
    
