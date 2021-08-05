@@ -26,7 +26,7 @@ gcloud container clusters create $CLUSTER \
    --zone $ZONE \
    --scopes $SCOPE \
 #   --enable-autoscaling --min-nodes "3" --max-nodes "10" \
-   --enable-autoscaling --min-nodes "$1" --max-nodes "$2" \
+   --enable-autoscaling --min-nodes $MINNODE --max-nodes $MAXNODE \
    --scopes=logging-write,storage-ro \
    --addons HorizontalPodAutoscaling,HttpLoadBalancing
    
