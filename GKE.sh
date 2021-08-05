@@ -25,8 +25,8 @@ cd GKE-locust
 gcloud container clusters create $CLUSTER \
    --zone $ZONE \
    --scopes $SCOPE \
-   --enable-autoscaling --min-nodes "3" --max-nodes "10" \
-#   --enable-autoscaling --min-nodes "$1" --max-nodes "$2" \
+#   --enable-autoscaling --min-nodes "3" --max-nodes "10" \
+   --enable-autoscaling --min-nodes "$1" --max-nodes "$2" \
    --scopes=logging-write,storage-ro \
    --addons HorizontalPodAutoscaling,HttpLoadBalancing
    
@@ -44,8 +44,8 @@ gcloud container images list | grep locust-tasks
 
 #deploying sample application on docker engine 
 #if already deployed then no need to redeploy as its just a sample application
-gcloud --quiet app deploy sample-webapp/app.yaml \
-  --project=$PROJECT
+#gcloud --quiet app deploy sample-webapp/app.yaml \
+#  --project=$PROJECT
   
 #Replace the target host and project ID with the deployed endpoint and project ID in the locust-master-controller.yaml and locust-worker-controller.yaml files
 sed -i -e "s/\[TARGET_HOST\]/$TARGET/g" kubernetes-config/locust-master-controller.yaml
